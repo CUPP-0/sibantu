@@ -19,7 +19,13 @@ export function getDatabaseUnavailableMessage(error) {
   if (error?.code === "APP_CONFIG_MISSING") {
     return error.message;
   }
-  if (["ECONNREFUSED", "ETIMEDOUT", "ENOTFOUND", "ECONNRESET", "08000", "08006"].includes(error?.code)) {
+  if (error?.code === "APP_CONFIG_CA_INVALID") {
+    return error.message;
+  }
+  if (["SELF_SIGNED_CERT_IN_CHAIN", "UNABLE_TO_VERIFY_LEAF_SIGNATURE", "CERT_HAS_EXPIRED", "DEPTH_ZERO_SELF_SIGNED_CERT"].includes(error?.code)) {
+    return "Sertifikat TLS Supabase tidak dapat diverifikasi. Periksa DATABASE_SSL_CA atau DATABASE_SSL_CA_BASE64 di environment Vercel.";
+  }
+  if (["ECONNREFUSED", "ETIMEDOUT", "ENOTFOUND", "ECONNRESET", "ENETUNREACH", "08000", "08006"].includes(error?.code)) {
     return "Supabase PostgreSQL tidak dapat dijangkau. Periksa DATABASE_URL dan koneksi internet, lalu coba lagi.";
   }
   if (error?.code === "28P01") {
@@ -30,6 +36,9 @@ export function getDatabaseUnavailableMessage(error) {
   }
   if (error?.code === "42P01") {
     return "Tabel SiBantu belum tersedia. Impor database/sibantu-supabase.sql melalui SQL Editor Supabase.";
+  }
+  if (error?.code === "42703") {
+    return "Struktur database SiBantu belum terbaru. Jalankan versi terkini database/sibantu-supabase.sql melalui SQL Editor Supabase.";
   }
   return null;
 }

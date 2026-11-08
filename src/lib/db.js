@@ -47,21 +47,65 @@ function normalizeDatabaseError(error) {
   throw error;
 }
 
+function certificateConfigError(message, cause) {
+  const error = new Error(message, { cause });
+  error.code = "APP_CONFIG_CA_INVALID";
+  return error;
+}
+
+function readCertificateAuthority() {
+  const caBase64 = process.env.DATABASE_SSL_CA_BASE64?.trim();
+  const caValue = process.env.DATABASE_SSL_CA?.trim();
+  if (caBase64 && caValue) {
+    throw certificateConfigError(
+      "Atur hanya satu variabel CA: DATABASE_SSL_CA (path/PEM) atau DATABASE_SSL_CA_BASE64 (base64 PEM).",
+    );
+  }
+  if (!caBase64 && !caValue) return undefined;
+
+  let certificate;
+  if (caBase64) {
+    certificate = Buffer.from(caBase64, "base64").toString("utf8");
+  } else if (caValue.includes("-----BEGIN CERTIFICATE-----")) {
+    certificate = caValue;
+  } else {
+    try {
+      const decoded = Buffer.from(caValue, "base64").toString("utf8");
+      certificate = decoded.includes("-----BEGIN CERTIFICATE-----")
+        ? decoded
+        : readFileSync(caValue, "utf8");
+    } catch (error) {
+      throw certificateConfigError(
+        "DATABASE_SSL_CA harus berisi CA PEM, base64 CA PEM, atau path sertifikat yang tersedia di deployment.",
+        error,
+      );
+    }
+  }
+
+  if (!certificate.includes("-----BEGIN CERTIFICATE-----")
+    || !certificate.includes("-----END CERTIFICATE-----")) {
+    throw certificateConfigError(
+      "Sertifikat CA tidak valid. Masukkan konten sertifikat PEM atau base64 dari file PEM.",
+    );
+  }
+  return certificate;
+}
+
 function postgresConnectionOptions() {
   const connectionString = new URL(process.env.DATABASE_URL);
   connectionString.searchParams.delete("sslmode");
   connectionString.searchParams.delete("sslrootcert");
+  const certificate = readCertificateAuthority();
 
   if (process.env.DATABASE_SSL === "false") {
-    if (process.env.DATABASE_SSL_CA) {
-      throw new Error("DATABASE_SSL_CA memerlukan koneksi TLS; hapus DATABASE_SSL=false.");
+    if (certificate) {
+      throw new Error("Konfigurasi CA memerlukan koneksi TLS; hapus DATABASE_SSL=false.");
     }
     return { connectionString: connectionString.toString(), ssl: false };
   }
 
   const ssl = { rejectUnauthorized: true };
-  const caPath = process.env.DATABASE_SSL_CA?.trim();
-  if (caPath) ssl.ca = readFileSync(caPath, "utf8");
+  if (certificate) ssl.ca = certificate;
 
   return { connectionString: connectionString.toString(), ssl };
 }

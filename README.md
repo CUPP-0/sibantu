@@ -29,7 +29,7 @@ Platform demonstrasi transparansi bantuan sosial dengan Next.js App Router, Java
 1. Buat proyek Supabase Cloud.
 2. Buka **SQL Editor**, lalu jalankan file database `database/sibantu-supabase.sql`. File ini berisi seluruh skema, fungsi trigger, akun demo, dan data simulasi; impor ke database Supabase baru.
 3. Buka **Project Settings → Database → Connect**, salin connection string PostgreSQL (Transaction Pooler direkomendasikan), lalu isi `DATABASE_URL` di `.env.local`. Koneksi TLS dan verifikasi sertifikat server aktif secara default.
-4. Jika koneksi melaporkan sertifikat Supabase tidak dipercaya, unduh CA certificate database dari pengaturan SSL database proyek Supabase, simpan sebagai file PEM lokal yang tidak di-commit, lalu isi `DATABASE_SSL_CA` dengan path file tersebut di `.env.local`. Jangan menonaktifkan verifikasi sertifikat untuk mengatasi error TLS.
+4. Jika koneksi melaporkan sertifikat Supabase tidak dipercaya, unduh CA certificate database dari pengaturan SSL database proyek Supabase. Secara lokal, isi `DATABASE_SSL_CA` dengan path file PEM, konten PEM, atau base64 dari PEM. Jangan menonaktifkan verifikasi sertifikat untuk mengatasi error TLS.
 5. Salin `.env.example` menjadi `.env.local` dan lengkapi `DATABASE_URL` serta rahasia aplikasi. Import SQL tersebut menyiapkan database cloud baru; data yang saat ini tersimpan pada MySQL lokal tidak disalin otomatis.
 6. Buat nilai rahasia yang berbeda untuk setiap lingkungan. Contoh PowerShell:
 
@@ -53,6 +53,22 @@ Platform demonstrasi transparansi bantuan sosial dengan Next.js App Router, Java
    ```
 
 8. Buka `http://localhost:3000`.
+
+### Deploy ke Vercel
+
+1. Push repositori ke GitHub, impor ke Vercel, dan atur **Root Directory** ke folder aplikasi ini.
+2. Tambahkan environment variables melalui **Project Settings → Environment Variables** untuk Production (tambahkan Preview/Development bila diperlukan): `DATABASE_URL`, `DATABASE_SSL=true`, `AUTH_SECRET`, `DATA_LOOKUP_SECRET`, dan `DATA_ENCRYPTION_KEY`. Gunakan nilai produksi yang baru dan rahasia yang berbeda untuk setiap lingkungan. Untuk `DATABASE_URL`, salin URI PostgreSQL dari Supabase; Transaction Pooler direkomendasikan untuk deployment serverless. URL proyek Supabase dan publishable key saja tidak menggantikan variabel ini untuk backend aplikasi.
+3. Jika koneksi memerlukan CA database, simpan CA PEM sebagai satu baris base64 pada environment variable `DATABASE_SSL_CA_BASE64` (atau konten PEM pada `DATABASE_SSL_CA`). Untuk menghasilkan nilainya secara lokal dari file CA:
+
+   ```powershell
+   [Convert]::ToBase64String([IO.File]::ReadAllBytes("cert\supabase-root-ca.crt"))
+   ```
+
+   Salin hasilnya langsung ke Vercel; jangan commit file sertifikat privat atau mengirimkannya ke chat. Verifikasi SSL tetap aktif.
+
+4. Jalankan SQL utama `database/sibantu-supabase.sql` di Supabase jika belum dilakukan, lalu deploy. Setelah mengubah environment variables di Vercel, buat deployment baru agar nilainya digunakan.
+
+**Penting:** rahasia yang pernah ditempel di chat harus dianggap terekspos. Ganti `AUTH_SECRET`, kata sandi database, dan jangan gunakan kembali nilai yang dibagikan. Perubahan `AUTH_SECRET` akan mengeluarkan sesi yang sedang aktif. `DATA_LOOKUP_SECRET` dan `DATA_ENCRYPTION_KEY` melindungi data yang sudah tersimpan; bila database berisi data nyata, rencanakan rotasi dan re-hash/re-enkripsi terlebih dahulu agar lookup dan dekripsi data lama tidak rusak. Untuk database demo kosong, gunakan secret baru sebelum impor data.
 
 ### Akun demonstrasi
 
