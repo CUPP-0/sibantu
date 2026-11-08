@@ -48,7 +48,7 @@ export default function PublicMetrics() {
           </div>
         ))}
       </div>
-      {!available && <p className="mt-3 text-[10px] leading-4 text-[#898799]">Statistik akan tampil setelah koneksi MySQL tersedia.</p>}
+      {!available && <p className="mt-3 text-[10px] leading-4 text-[#898799]">Statistik akan tampil setelah koneksi Supabase tersedia.</p>}
       {stats?.updatedAt && <p className="mt-3 text-[10px] text-[#898799]">Diperbarui {new Date(stats.updatedAt).toLocaleDateString("id-ID")}</p>}
     </div>
   );

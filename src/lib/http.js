@@ -19,20 +19,17 @@ export function getDatabaseUnavailableMessage(error) {
   if (error?.code === "APP_CONFIG_MISSING") {
     return error.message;
   }
-  if (["ECONNREFUSED", "ETIMEDOUT", "ENOTFOUND", "PROTOCOL_CONNECTION_LOST"].includes(error?.code)) {
-    return "MySQL belum berjalan atau tidak dapat dijangkau. Jalankan MySQL melalui XAMPP/Laragon, lalu coba lagi.";
+  if (["ECONNREFUSED", "ETIMEDOUT", "ENOTFOUND", "ECONNRESET", "08000", "08006"].includes(error?.code)) {
+    return "Supabase PostgreSQL tidak dapat dijangkau. Periksa DATABASE_URL dan koneksi internet, lalu coba lagi.";
   }
-  if (error?.code === "ER_ACCESS_DENIED_ERROR") {
-    return "MySQL menolak akses. Periksa DB_USER dan DB_PASSWORD di file .env.local.";
+  if (error?.code === "28P01") {
+    return "Supabase menolak kredensial database. Periksa kata sandi pada DATABASE_URL.";
   }
-  if (error?.code === "ER_BAD_DB_ERROR") {
-    return "Database bansosguard belum tersedia. Impor database/database.sql melalui phpMyAdmin.";
+  if (error?.code === "3D000") {
+    return "Database Supabase tidak ditemukan. Periksa nama database pada DATABASE_URL.";
   }
-  if (error?.code === "ER_NO_SUCH_TABLE") {
-    return "Tabel aplikasi belum tersedia. Impor database/database.sql lalu database/seed.sql melalui phpMyAdmin.";
-  }
-  if (error?.message === "Konfigurasi MySQL belum lengkap. Periksa file .env.local.") {
-    return "MySQL belum dikonfigurasi. Salin .env.example menjadi .env.local, isi pengaturan database, lalu mulai ulang aplikasi.";
+  if (error?.code === "42P01") {
+    return "Tabel SiBantu belum tersedia. Impor database/sibantu-supabase.sql melalui SQL Editor Supabase.";
   }
   return null;
 }

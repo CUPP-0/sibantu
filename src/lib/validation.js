@@ -52,6 +52,13 @@ export const beneficiaryProgramAmountSchema = z.object({
   amount: z.coerce.number().finite().min(0).max(9999999999999.99),
 });
 
+export const distributionEventSchema = z.object({
+  title: z.string().trim().min(3).max(160),
+  description: z.string().trim().max(2000).optional().default(""),
+  scheduledAt: z.iso.datetime(),
+  location: z.string().trim().min(3).max(255),
+});
+
 export const qrTokenSchema = z.object({
   token: z.string().trim().min(32).max(128).regex(/^[A-Za-z0-9_-]+$/),
 });

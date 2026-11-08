@@ -42,7 +42,7 @@ export default function ProgramsPage() {
         </select>
       </div>
       {loading && <div className="mt-8 rounded-2xl border border-[#eae8f0] bg-white p-8 text-center text-sm text-[#77778a]">Memuat data program…</div>}
-      {error && <div role="alert" className="mt-8 rounded-2xl border border-[#f1d8d8] bg-[#fff9f9] p-5 text-sm text-[#a93434]">{error} Pastikan MySQL sudah terhubung dan data program sudah diimpor.</div>}
+      {error && <div role="alert" className="mt-8 rounded-2xl border border-[#f1d8d8] bg-[#fff9f9] p-5 text-sm text-[#a93434]">{error} Pastikan Supabase sudah terhubung dan skema SiBantu sudah diimpor.</div>}
       {!loading && !error && !filtered.length && <div className="mt-8 rounded-2xl border border-dashed border-[#ddd9e8] bg-white p-10 text-center text-sm text-[#77778a]">Belum ada program yang sesuai dengan pencarian Anda.</div>}
       <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((program) => (

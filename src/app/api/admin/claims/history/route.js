@@ -37,7 +37,7 @@ export async function GET(request) {
       values.push(`${from} 00:00:00`);
     }
     if (to) {
-      filters.push("h.occurred_at < DATE_ADD(?, INTERVAL 1 DAY)");
+      filters.push("h.occurred_at < CAST(? AS DATE) + INTERVAL '1 day'");
       values.push(`${to} 00:00:00`);
     }
 

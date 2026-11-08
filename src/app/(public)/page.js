@@ -4,16 +4,18 @@ import {
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
-  ClipboardCheck,
   Eye,
   HandHeart,
+  HeartHandshake,
+  House,
   LockKeyhole,
+  MapPin,
   MoveUpRight,
-  ScanLine,
+  Shield,
   ShieldCheck,
   Sparkles,
+  UsersRound,
 } from "lucide-react";
-import PublicMetrics from "@/components/public-metrics";
 
 const programs = [
   { tag: "BANTUAN PANGAN", title: "Program Sembako", description: "Dukungan pemenuhan kebutuhan pangan bagi keluarga yang memenuhi kriteria.", icon: HandHeart, tone: "purple" },
@@ -42,7 +44,7 @@ export default function HomePage() {
               Pastikan bantuan sosial <span className="text-[#6d4aff]">tepat sasaran.</span>
             </h1>
             <p className="mt-5 max-w-[510px] text-[15px] leading-7 text-[#77778a] sm:text-[16px]">
-              BansosGuard hadir untuk meningkatkan transparansi dan pengawasan bantuan sosial agar penyaluran bantuan dapat dipantau dengan lebih mudah, aman, dan akuntabel.
+              SiBantu hadir untuk meningkatkan transparansi dan pengawasan bantuan sosial agar penyaluran bantuan dapat dipantau dengan lebih mudah, aman, dan akuntabel.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/cek-bantuan" className="inline-flex h-[50px] items-center justify-center gap-2 rounded-xl bg-[#6d4aff] px-5 text-[13px] font-semibold text-white shadow-[0_8px_18px_rgba(109,74,255,0.2)] transition hover:bg-[#5035c9]">
@@ -58,45 +60,29 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[550px]">
-            <div className="absolute -right-5 -top-8 size-36 rounded-full bg-[#f1edff] blur-2xl" />
-            <div className="absolute -bottom-6 -left-7 size-40 rounded-full bg-[#e6f5ee] blur-2xl" />
-            <div className="relative rounded-[26px] border border-[#ebe8f1] bg-white p-4 soft-shadow sm:p-5">
-              <div className="flex items-center justify-between border-b border-[#f0eef4] pb-4">
-                <div className="flex items-center gap-2.5">
-                  <span className="flex size-8 items-center justify-center rounded-[10px] bg-[#f3f0ff] text-[#6d4aff]"><ScanLine size={17} /></span>
-                  <div><p className="text-[12px] font-bold">Pratinjau dashboard</p><p className="mt-0.5 text-[10px] text-[#9290a0]">Ilustrasi ringkasan penyaluran</p></div>
-                </div>
-                <span className="rounded-full bg-[#f7f5ff] px-2.5 py-1 text-[9px] font-bold text-[#6448d8]">ILUSTRASI</span>
-              </div>
-              <div className="grid gap-3 pt-4 sm:grid-cols-[1fr_0.85fr]">
-                <div className="rounded-[16px] bg-[#faf9fc] p-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-semibold text-[#77778a]">Grafik penyaluran</span>
-                    <span className="text-[9px] text-[#9290a0]">Contoh visual</span>
-                  </div>
-                  <div className="mt-6 flex h-[116px] items-end justify-between gap-2">
-                    {[38, 53, 46, 67, 55, 76, 62, 91, 69, 82, 72, 97].map((height, index) => (
-                      <div key={index} className="flex h-full flex-1 items-end">
-                        <div style={{ height: `${height}%` }} className={`w-full rounded-t-[5px] ${index === 11 ? "bg-[#6d4aff]" : "bg-[#ddd5ff]"}`} />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-2 flex justify-between text-[8px] text-[#a2a0ad]"><span>Jan</span><span>Mar</span><span>Mei</span><span>Jul</span><span>Sep</span><span>Des</span></div>
-                </div>
-                <PublicMetrics />
-              </div>
-              <div className="mt-3 flex items-center justify-between rounded-[13px] bg-[#f7f5ff] px-3.5 py-3">
-                <div className="flex items-center gap-2.5">
-                  <span className="flex size-7 items-center justify-center rounded-full bg-white text-[#6d4aff]"><ClipboardCheck size={14} /></span>
-                  <p className="text-[10px] font-medium text-[#5c5872]">Setiap penyaluran tercatat dan dapat diawasi.</p>
-                </div>
-                <ArrowUpRight size={15} className="text-[#6d4aff]" />
-              </div>
+          <div className="relative mx-auto flex min-h-[390px] w-full max-w-[550px] items-center justify-center sm:min-h-[470px]" aria-hidden="true">
+            <div className="absolute left-1/2 top-1/2 size-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#f4f0ff] sm:size-[390px]" />
+            <div className="absolute left-1/2 top-1/2 size-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[#d9d0ff] sm:size-[320px]" />
+            <div className="absolute left-1/2 top-1/2 size-[170px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#8d72ff] to-[#6241e8] shadow-[0_28px_70px_rgba(109,74,255,0.28)] sm:size-[220px]" />
+            <div className="absolute left-1/2 top-1/2 flex size-[116px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[34px] border border-white/25 bg-white/15 text-white backdrop-blur-sm sm:size-[144px]">
+              <HeartHandshake size={72} strokeWidth={1.35} className="sm:hidden" />
+              <HeartHandshake size={88} strokeWidth={1.25} className="hidden sm:block" />
             </div>
-            <div className="absolute -bottom-5 -left-7 hidden items-center gap-2.5 rounded-2xl border border-[#ebe8f1] bg-white px-4 py-3 shadow-lg sm:flex">
-              <span className="flex size-8 items-center justify-center rounded-full bg-[#eff8f3] text-[#218755]"><BadgeCheck size={16} /></span>
-              <div><p className="text-[10px] font-bold">Aman & terverifikasi</p><p className="mt-0.5 text-[9px] text-[#9290a0]">Privasi penerima dijaga</p></div>
+            <div className="absolute left-[8%] top-[17%] flex size-[58px] items-center justify-center rounded-[20px] border border-[#eeeaf7] bg-white text-[#6d4aff] shadow-[0_12px_30px_rgba(46,37,87,0.09)] sm:left-[10%] sm:top-[15%] sm:size-[68px]">
+              <House size={27} strokeWidth={1.7} />
+            </div>
+            <div className="absolute right-[8%] top-[23%] flex size-[54px] items-center justify-center rounded-full border border-[#eeeaf7] bg-white text-[#27875a] shadow-[0_12px_30px_rgba(46,37,87,0.09)] sm:right-[10%] sm:top-[20%] sm:size-[64px]">
+              <Shield size={25} strokeWidth={1.7} />
+            </div>
+            <div className="absolute bottom-[18%] left-[12%] flex size-[54px] items-center justify-center rounded-full border border-[#eeeaf7] bg-white text-[#d98b32] shadow-[0_12px_30px_rgba(46,37,87,0.09)] sm:bottom-[15%] sm:left-[15%] sm:size-[64px]">
+              <UsersRound size={25} strokeWidth={1.7} />
+            </div>
+            <div className="absolute bottom-[17%] right-[9%] flex size-[58px] items-center justify-center rounded-[20px] border border-[#eeeaf7] bg-white text-[#6d4aff] shadow-[0_12px_30px_rgba(46,37,87,0.09)] sm:bottom-[14%] sm:right-[10%] sm:size-[68px]">
+              <MapPin size={27} strokeWidth={1.7} />
+            </div>
+            <div className="absolute bottom-[3%] left-1/2 flex -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-2xl border border-[#ebe8f1] bg-white px-4 py-3 shadow-[0_12px_30px_rgba(46,37,87,0.1)] sm:bottom-[2%]">
+              <span className="flex size-8 items-center justify-center rounded-full bg-[#eff8f3] text-[#218755]"><HeartHandshake size={16} /></span>
+              <div><p className="text-[10px] font-bold text-[#302d45]">Bersama untuk sesama</p><p className="mt-0.5 text-[9px] text-[#9290a0]">Bantuan yang lebih berarti</p></div>
             </div>
           </div>
         </div>

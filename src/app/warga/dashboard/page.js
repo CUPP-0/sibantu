@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { ArrowRight, FilePlus2, ShieldCheck } from "lucide-react";
 import { getSession } from "@/lib/auth";
 import DatabaseSetupNotice from "@/components/database-setup-notice";
+import CitizenEvents from "@/components/citizen-events";
 import { getDatabaseUnavailableMessage } from "@/lib/http";
 
 export const metadata = { title: "Layanan Warga" };
@@ -30,6 +31,7 @@ export default async function CitizenDashboardPage() {
         </div>
       </div>
 
+      <CitizenEvents />
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         <Link href="/cek-bantuan" className="group rounded-[18px] border border-[#eae8f0] bg-white p-5 transition hover:border-[#d8d0fa] hover:shadow-[0_12px_30px_rgba(37,26,77,0.06)]">
           <span className="flex size-10 items-center justify-center rounded-[12px] bg-[#f3f0ff] text-[#6d4aff]"><ShieldCheck size={19} /></span>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import QRCode from "qrcode";
 import { useRouter } from "next/navigation";
 import { CircleCheck, Clock3, Copy, LogOut, QrCode, RefreshCw, ShieldCheck } from "lucide-react";
+import CitizenEvents from "@/components/citizen-events";
 
 const dateTime = (value) => value
   ? new Date(value).toLocaleString("id-ID", { dateStyle: "long", timeStyle: "short" })
@@ -84,6 +85,7 @@ export default function CitizenProfile({ user }) {
         <div className="flex flex-wrap gap-2"><button type="button" onClick={refreshQr} disabled={refreshing || loading || loggingOut} className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#eae8f0] bg-white px-3 text-[10px] font-semibold text-[#555366] hover:border-[#d8d0fa] hover:text-[#6d4aff] disabled:opacity-50"><RefreshCw size={13} className={refreshing ? "animate-spin" : ""} /> Perbarui QR</button><button type="button" onClick={logout} disabled={loggingOut} className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#f1d8d8] bg-white px-3 text-[10px] font-semibold text-[#a93434] hover:bg-[#fff3f3] disabled:opacity-50"><LogOut size={13} />{loggingOut ? "Keluar…" : "Keluar"}</button></div>
       </div>
 
+      <CitizenEvents />
       <div className="mt-7 flex items-start gap-2.5 rounded-[13px] border border-[#e8e3fb] bg-[#f7f5ff] p-4 text-[10px] leading-5 text-[#625b7c]"><QrCode size={15} className="mt-0.5 shrink-0 text-[#6d4aff]" /><p>Tunjukkan QR program bantuan kepada petugas cabang saat mengambil bantuan. QR berlaku selama 15 menit; gunakan tombol Perbarui QR jika sudah kedaluwarsa. Jangan bagikan QR kepada orang lain.</p></div>
       {error && <p role="alert" className="mt-4 rounded-xl bg-[#fff3f3] p-3 text-[10px] leading-5 text-[#a93434]">{error}</p>}
       {loading && <p className="mt-6 rounded-[17px] border border-[#eae8f0] bg-white p-7 text-center text-[11px] text-[#77778a]">Memuat profil dan QR bantuan…</p>}

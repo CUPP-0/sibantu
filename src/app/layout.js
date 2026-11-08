@@ -2,8 +2,8 @@ import "./globals.css";
 
 export const metadata = {
   title: {
-    default: "BansosGuard — Bantuan Tepat Sasaran",
-    template: "%s | BansosGuard",
+    default: "SiBantu — Bantuan Tepat Sasaran",
+    template: "%s | SiBantu",
   },
   description:
     "Platform transparansi dan pengawasan bantuan sosial yang aman, mudah diakses, dan akuntabel.",

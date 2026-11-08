@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, BarChart3, Building2, ClipboardList, History, MessageSquareWarning, QrCode, ShieldCheck, Users } from "lucide-react";
+import { ArrowLeft, BarChart3, Building2, CalendarDays, ClipboardList, History, MessageSquareWarning, QrCode, ShieldCheck, Users } from "lucide-react";
 
 const linksByRole = {
   super_admin: [
@@ -13,6 +13,7 @@ const linksByRole = {
     { href: "/admin/penerima", label: "Akun warga", icon: Users },
     { href: "/admin/verifikasi-qr", label: "Verifikasi QR", icon: QrCode },
     { href: "/admin/riwayat", label: "Riwayat pengambilan", icon: History },
+    { href: "/admin/event", label: "Jadwal bantuan", icon: CalendarDays },
   ],
 };
 
@@ -23,7 +24,7 @@ export default function AdminWorkspace({ user, title, children }) {
       <aside className="fixed inset-y-0 left-0 hidden w-[235px] border-r border-[#eae8f0] bg-white p-5 lg:block">
         <Link href="/" className="flex items-center gap-2.5">
           <span className="flex size-9 items-center justify-center rounded-[11px] bg-[#6d4aff] text-white"><ShieldCheck size={19} /></span>
-          <span className="text-[15px] font-bold tracking-[-0.04em]">bansos<span className="text-[#6d4aff]">guard</span></span>
+          <span className="text-[15px] font-bold tracking-[-0.04em]">si<span className="text-[#6d4aff]">bantu</span></span>
         </Link>
         <p className="mt-10 px-2 text-[9px] font-bold uppercase tracking-[0.14em] text-[#a09eaa]">Menu pengelola</p>
         <nav className="mt-3 grid gap-1">

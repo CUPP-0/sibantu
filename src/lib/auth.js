@@ -2,7 +2,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { query } from "@/lib/db";
 
-const COOKIE_NAME = "bansosguard_session";
+const COOKIE_NAME = "sibantu_session";
 const SESSION_SECONDS = 60 * 60 * 8;
 
 function sessionSecret() {

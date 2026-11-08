@@ -94,7 +94,7 @@ export async function POST(request) {
     const [programResult] = await connection.execute(
       `INSERT INTO beneficiary_programs
         (beneficiary_id, program_id, assistance_amount, registration_date, eligibility_status, verification_status)
-       VALUES (?, ?, ?, CURRENT_DATE(), 'layak', 'terverifikasi')`,
+       VALUES (?, ?, ?, CURRENT_DATE, 'layak', 'terverifikasi')`,
       [beneficiaryResult.insertId, programId, programs[0].amount],
     );
     await connection.execute(

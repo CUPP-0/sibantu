@@ -5,12 +5,13 @@ export async function GET() {
   try {
     const [monthly, byProgram, byRegion] = await Promise.all([
       query(`
-        SELECT DATE_FORMAT(distribution_date, '%Y-%m') AS month,
+        SELECT TO_CHAR(distribution_date, 'YYYY-MM') AS month,
           COUNT(*) AS transactions, COALESCE(SUM(amount), 0) AS amount
         FROM distributions
         WHERE status = 'berhasil'
-          AND distribution_date >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH)
-        GROUP BY DATE_FORMAT(distribution_date, '%Y-%m')
+          AND distribution_date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '11 months'
+          AND distribution_date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+        GROUP BY TO_CHAR(distribution_date, 'YYYY-MM')
         ORDER BY month
       `),
       query(`

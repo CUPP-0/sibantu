@@ -11,7 +11,7 @@ const principles = [
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-[1100px] px-5 py-12 lg:px-8 lg:py-16">
-      <PageHeading eyebrow="Tentang BansosGuard" title="Teknologi untuk bantuan yang lebih transparan." description="BansosGuard adalah platform demonstrasi untuk mendukung transparansi, pendataan, pemantauan, dan pengawasan penyaluran bantuan sosial." />
+      <PageHeading eyebrow="Tentang SiBantu" title="Teknologi untuk bantuan yang lebih transparan." description="SiBantu adalah platform demonstrasi untuk mendukung transparansi, pendataan, pemantauan, dan pengawasan penyaluran bantuan sosial." />
       <section className="mt-8 rounded-[20px] bg-[#29224c] p-6 text-white sm:p-9">
         <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#c6baff]">Tujuan kami</p>
         <h2 className="mt-3 max-w-[740px] text-[24px] font-bold leading-tight tracking-[-0.05em] sm:text-[32px]">Bantuan tepat sasaran, pengawasan lebih transparan.</h2>
@@ -26,7 +26,7 @@ export default function AboutPage() {
           {["Data program dan wilayah dikelola oleh petugas berwenang.", "Penerima diverifikasi sebelum dicatat dalam program.", "Penyaluran bantuan dicatat beserta waktu dan petugas.", "Masyarakat melihat ringkasan publik atau mengirim laporan."].map((item, index) => <li key={item} className="flex gap-3 text-[11px] leading-5 text-[#77778a]"><span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#f3f0ff] text-[10px] font-bold text-[#6d4aff]">{index + 1}</span>{item}</li>)}
         </ol>
       </section>
-      <p className="mt-5 text-[10px] leading-5 text-[#9290a0]">BansosGuard merupakan aplikasi demonstrasi dan bukan kanal resmi pemerintah. Data seed yang disertakan adalah data simulasi, bukan data penerima bantuan yang sebenarnya.</p>
+      <p className="mt-5 text-[10px] leading-5 text-[#9290a0]">SiBantu merupakan aplikasi demonstrasi dan bukan kanal resmi pemerintah. Data seed yang disertakan adalah data simulasi, bukan data penerima bantuan yang sebenarnya.</p>
     </div>
   );
 }

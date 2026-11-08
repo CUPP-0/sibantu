@@ -32,7 +32,7 @@ export default function TransparencyCharts() {
       .catch((cause) => setError(cause.message));
   }, []);
 
-  if (error) return <div role="alert" className="rounded-2xl border border-[#f1d8d8] bg-white p-5 text-sm text-[#a93434]">{error} Hubungkan MySQL untuk memuat transparansi dari data aktual.</div>;
+  if (error) return <div role="alert" className="rounded-2xl border border-[#f1d8d8] bg-white p-5 text-sm text-[#a93434]">{error} Periksa koneksi Supabase untuk memuat transparansi dari data aktual.</div>;
   if (!data) return <div className="rounded-2xl border border-[#eae8f0] bg-white p-8 text-center text-sm text-[#77778a]">Memuat data distribusi…</div>;
 
   const monthData = data.monthly.map((row) => ({

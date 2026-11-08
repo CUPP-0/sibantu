@@ -44,12 +44,12 @@ export default function SiteShell({ children }) {
     <>
       <header className="sticky top-0 z-30 border-b border-[#eae8f0] bg-white/95 backdrop-blur">
         <div className="mx-auto flex h-[76px] max-w-[1240px] items-center justify-between px-5 lg:px-8">
-          <Link href="/" className="flex items-center gap-3" aria-label="BansosGuard beranda">
+          <Link href="/" className="flex items-center gap-3" aria-label="SiBantu beranda">
             <span className="flex size-10 items-center justify-center rounded-[13px] bg-[#6d4aff] text-white">
               <ShieldCheck size={23} strokeWidth={2.2} />
             </span>
             <span>
-              <span className="block text-[17px] font-bold tracking-[-0.04em]">bansos<span className="text-[#6d4aff]">guard</span></span>
+              <span className="block text-[17px] font-bold tracking-[-0.04em]">si<span className="text-[#6d4aff]">bantu</span></span>
               <span className="block text-[10px] font-medium tracking-[0.12em] text-[#9290a0]">TRANSPARANSI BANTUAN</span>
             </span>
           </Link>
@@ -138,7 +138,7 @@ export default function SiteShell({ children }) {
           <div>
             <h3 className="text-[13px] font-bold">Informasi</h3>
             <div className="mt-4 grid gap-3 text-[13px] text-[#77778a]">
-              <a href="mailto:layanan@bansosguard.id" className="hover:text-[#6d4aff]">Kontak layanan</a>
+              <a href="mailto:layanan@sibantu.id" className="hover:text-[#6d4aff]">Kontak layanan</a>
               <Link href="/kebijakan-privasi" className="hover:text-[#6d4aff]">Kebijakan privasi</Link>
               <Link href="/syarat-ketentuan" className="hover:text-[#6d4aff]">Syarat & ketentuan</Link>
             </div>
@@ -146,7 +146,7 @@ export default function SiteShell({ children }) {
         </div>
         <div className="border-t border-[#f0eef4]">
           <div className="mx-auto flex max-w-[1240px] flex-col gap-2 px-5 py-4 text-[11px] text-[#9290a0] sm:flex-row sm:items-center sm:justify-between lg:px-8">
-            <span>© 2026 BansosGuard. Platform demonstrasi — data yang ditampilkan bersifat simulasi.</span>
+            <span>© 2026 SiBantu. Platform demonstrasi — data yang ditampilkan bersifat simulasi.</span>
             <span>Dirancang untuk transparansi dan perlindungan privasi.</span>
           </div>
         </div>

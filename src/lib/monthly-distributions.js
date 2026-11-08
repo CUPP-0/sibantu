@@ -7,16 +7,16 @@ export async function getMonthlyDistributionStats(regionIds = null) {
     ? `AND b.region_id IN (${regionIds.map(() => "?").join(", ")})`
     : "";
   const monthlyRows = await query(
-    `SELECT DATE_FORMAT(d.distribution_date, '%Y-%m') AS month,
+    `SELECT TO_CHAR(d.distribution_date, 'YYYY-MM') AS month,
       COUNT(*) AS transactions, COALESCE(SUM(d.amount), 0) AS amount
      FROM distributions d
      JOIN beneficiary_programs bp ON bp.id = d.beneficiary_program_id
      JOIN beneficiaries b ON b.id = bp.beneficiary_id
      WHERE d.status = 'berhasil'
-       AND d.distribution_date >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 11 MONTH)
-       AND d.distribution_date < DATE_ADD(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL 1 MONTH)
+       AND d.distribution_date >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '11 months'
+       AND d.distribution_date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
        ${regionFilter}
-     GROUP BY DATE_FORMAT(d.distribution_date, '%Y-%m')
+     GROUP BY TO_CHAR(d.distribution_date, 'YYYY-MM')
      ORDER BY month`,
     regionIds || [],
   );

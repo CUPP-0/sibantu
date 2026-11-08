@@ -5,7 +5,7 @@ export const metadata = { title: "Kebijakan Privasi" };
 export default function PrivacyPolicyPage() {
   return (
     <div className="mx-auto max-w-[900px] px-5 py-12 lg:px-8 lg:py-16">
-      <PageHeading eyebrow="Informasi layanan" title="Kebijakan privasi." description="Ringkasan prinsip perlindungan data pada aplikasi demonstrasi BansosGuard." />
+      <PageHeading eyebrow="Informasi layanan" title="Kebijakan privasi." description="Ringkasan prinsip perlindungan data pada aplikasi demonstrasi SiBantu." />
       <div className="mt-8 grid gap-5 rounded-[20px] border border-[#eae8f0] bg-white p-6 text-[12px] leading-6 text-[#686779] sm:p-8">
         <section><h2 className="font-bold text-[#202033]">Data yang digunakan</h2><p className="mt-2">Aplikasi hanya memproses data yang dibutuhkan untuk autentikasi, pengelolaan program, penyaluran, dan tindak lanjut pengaduan. Data demo yang disediakan tidak mewakili individu nyata.</p></section>
         <section><h2 className="font-bold text-[#202033]">Perlindungan informasi</h2><p className="mt-2">Kata sandi di-hash, sesi menggunakan cookie HttpOnly, dan kontak pelapor pada laporan baru dienkripsi sebelum disimpan. Statistik publik disajikan dalam bentuk agregat.</p></section>

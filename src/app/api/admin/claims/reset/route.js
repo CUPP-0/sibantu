@@ -23,7 +23,7 @@ export async function POST(request) {
        LEFT JOIN distributions d ON d.beneficiary_program_id = bp.id
        WHERE b.region_id IN (${regionIds.map(() => "?").join(", ")})
          AND bc.status = 'sudah_diambil'
-       FOR UPDATE`,
+       FOR UPDATE OF bc`,
       regionIds,
     );
     for (const claim of claims) {
@@ -36,19 +36,21 @@ export async function POST(request) {
     }
     await connection.execute(
       `UPDATE beneficiary_claims bc
-       JOIN beneficiary_programs bp ON bp.id = bc.beneficiary_program_id
+       SET cycle_number = bc.cycle_number + CASE WHEN bc.status = 'sudah_diambil' THEN 1 ELSE 0 END,
+         status = 'belum_diambil', claimed_at = NULL, claimed_by = NULL
+       FROM beneficiary_programs bp
        JOIN beneficiaries b ON b.id = bp.beneficiary_id
-       SET bc.cycle_number = bc.cycle_number + IF(bc.status = 'sudah_diambil', 1, 0),
-         bc.status = 'belum_diambil', bc.claimed_at = NULL, bc.claimed_by = NULL
-       WHERE b.region_id IN (${regionIds.map(() => "?").join(", ")})`,
+       WHERE bp.id = bc.beneficiary_program_id
+         AND b.region_id IN (${regionIds.map(() => "?").join(", ")})`,
       regionIds,
     );
     await connection.execute(
       `UPDATE distributions d
-       JOIN beneficiary_programs bp ON bp.id = d.beneficiary_program_id
+       SET status = 'menunggu', notes = 'Status pengambilan direset; riwayat klaim tersimpan'
+       FROM beneficiary_programs bp
        JOIN beneficiaries b ON b.id = bp.beneficiary_id
-       SET d.status = 'menunggu', d.notes = 'Status pengambilan direset; riwayat klaim tersimpan'
-       WHERE b.region_id IN (${regionIds.map(() => "?").join(", ")}) AND d.status = 'berhasil'`,
+       WHERE bp.id = d.beneficiary_program_id
+         AND b.region_id IN (${regionIds.map(() => "?").join(", ")}) AND d.status = 'berhasil'`,
       regionIds,
     );
     await connection.execute(

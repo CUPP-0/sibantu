@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  ArrowUpRight, BadgeAlert, BarChart3, Building2, CircleDollarSign, ClipboardList, HandHeart, MessageSquareWarning,
+  ArrowUpRight, BadgeAlert, BarChart3, Building2, CalendarDays, CircleDollarSign, ClipboardList, HandHeart, History, MessageSquareWarning,
   LayoutDashboard, LogOut, QrCode, ShieldCheck, Users,
 } from "lucide-react";
 import MonthlyDistributionChart from "@/components/monthly-distribution-chart";
@@ -49,25 +49,44 @@ export default function AdminDashboard({ user }) {
 
   return (
     <main className="min-h-screen bg-[#faf9fc]">
-      <aside className="fixed inset-y-0 left-0 hidden w-[245px] border-r border-[#eae8f0] bg-white p-5 lg:block">
-        <Link href="/" className="flex items-center gap-2.5"><span className="flex size-9 items-center justify-center rounded-[11px] bg-[#6d4aff] text-white"><ShieldCheck size={19} /></span><span className="text-[15px] font-bold tracking-[-0.04em]">bansos<span className="text-[#6d4aff]">guard</span></span></Link>
+      <aside className="fixed inset-y-0 left-0 hidden w-[245px] overflow-y-auto border-r border-[#eae8f0] bg-white p-5 lg:block">
+        <Link href="/" className="flex items-center gap-2.5"><span className="flex size-9 items-center justify-center rounded-[11px] bg-[#6d4aff] text-white"><ShieldCheck size={19} /></span><span className="text-[15px] font-bold tracking-[-0.04em]">si<span className="text-[#6d4aff]">bantu</span></span></Link>
         <p className="mt-10 px-2 text-[9px] font-bold uppercase tracking-[0.14em] text-[#a09eaa]">Menu utama</p>
-        <Link href="/admin/dashboard" className="mt-3 flex items-center gap-3 rounded-xl bg-[#f3f0ff] px-3 py-3 text-[11px] font-semibold text-[#5b43c3]"><LayoutDashboard size={16} /> Dashboard</Link>
+        <nav className="mt-3 grid gap-1" aria-label="Navigasi admin">
+          <Link href="/admin/dashboard" aria-current="page" className="flex items-center gap-3 rounded-xl bg-[#f3f0ff] px-3 py-3 text-[11px] font-semibold text-[#5b43c3]"><LayoutDashboard size={16} /> Dashboard</Link>
         {user.role === "super_admin" && <>
-          <Link href="/admin/cabang" className="mt-1 flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><Building2 size={16} /> Admin cabang</Link>
-          <Link href="/admin/progres" className="mt-1 flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><BarChart3 size={16} /> Progres penyaluran</Link>
-          <Link href="/admin/pengaduan" className="mt-1 flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><MessageSquareWarning size={16} /> Pengaduan</Link>
+          <Link href="/admin/cabang" className="flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><Building2 size={16} /> Admin cabang</Link>
+          <Link href="/admin/progres" className="flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><BarChart3 size={16} /> Progres penyaluran</Link>
+          <Link href="/admin/pengaduan" className="flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><MessageSquareWarning size={16} /> Pengaduan</Link>
         </>}
         {user.role === "admin_daerah" && <>
-          <Link href="/admin/penerima" className="mt-1 flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><Users size={16} /> Akun warga</Link>
-          <Link href="/admin/verifikasi-qr" className="mt-1 flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><QrCode size={16} /> Verifikasi QR</Link>
+          <Link href="/admin/penerima" className="flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><Users size={16} /> Akun warga</Link>
+          <Link href="/admin/verifikasi-qr" className="flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><QrCode size={16} /> Verifikasi QR</Link>
+          <Link href="/admin/riwayat" className="flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><History size={16} /> Riwayat pengambilan</Link>
+          <Link href="/admin/event" className="flex items-center gap-3 rounded-xl px-3 py-3 text-[11px] font-semibold text-[#626073] hover:bg-[#f3f0ff]"><CalendarDays size={16} /> Jadwal bantuan</Link>
         </>}
+        </nav>
         <div className="mt-8 rounded-[14px] border border-[#eae8f0] bg-[#fcfbfd] p-3.5"><span className="text-[9px] font-bold uppercase tracking-wider text-[#9997a4]">Wilayah kerja</span><p className="mt-1.5 text-[11px] font-semibold text-[#484657]">{user.role === "super_admin" ? "Nasional" : "Sesuai penugasan"}</p><p className="mt-1 text-[9px] leading-4 text-[#9290a0]">Akses data dibatasi oleh hak dan wilayah akun.</p></div>
       </aside>
       <div className="lg:pl-[245px]">
-        <header className="sticky top-0 z-10 flex h-[68px] items-center justify-between border-b border-[#eae8f0] bg-white/95 px-5 backdrop-blur sm:px-8">
-          <div><p className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#9997a4]">Portal pengelola</p><p className="mt-1 text-[13px] font-bold">Dashboard</p></div>
-          <div className="flex items-center gap-3"><span className="hidden text-right sm:block"><span className="block text-[11px] font-semibold">{user.name}</span><span className="block text-[9px] text-[#9290a0]">{roles[user.role] || user.role}</span></span><button onClick={logout} className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#eae8f0] px-3 text-[10px] font-semibold text-[#5b596c] hover:border-[#d1c9f4] hover:text-[#6d4aff]"><LogOut size={14} /> Keluar</button></div>
+        <header className="sticky top-0 z-10 border-b border-[#eae8f0] bg-white/95 px-5 backdrop-blur sm:px-8">
+          <div className="flex h-[68px] items-center justify-between">
+            <div><p className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#9997a4]">Portal pengelola</p><p className="mt-1 text-[13px] font-bold">Dashboard</p></div>
+            <div className="flex items-center gap-3"><span className="hidden text-right sm:block"><span className="block text-[11px] font-semibold">{user.name}</span><span className="block text-[9px] text-[#9290a0]">{roles[user.role] || user.role}</span></span><button onClick={logout} className="inline-flex h-9 items-center gap-2 rounded-lg border border-[#eae8f0] px-3 text-[10px] font-semibold text-[#5b596c] hover:border-[#d1c9f4] hover:text-[#6d4aff]"><LogOut size={14} /> Keluar</button></div>
+          </div>
+          <nav className="flex gap-2 overflow-x-auto pb-3 lg:hidden" aria-label="Navigasi admin">
+            <Link href="/admin/dashboard" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#d8d0fa] bg-[#f7f5ff] px-3 py-2 text-[10px] font-semibold text-[#5b43c3]"><LayoutDashboard size={13} />Dashboard</Link>
+            {user.role === "admin_daerah" ? <>
+              <Link href="/admin/penerima" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#eae8f0] px-3 py-2 text-[10px] font-semibold text-[#626073]"><Users size={13} />Akun warga</Link>
+              <Link href="/admin/verifikasi-qr" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#eae8f0] px-3 py-2 text-[10px] font-semibold text-[#626073]"><QrCode size={13} />Verifikasi QR</Link>
+              <Link href="/admin/riwayat" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#eae8f0] px-3 py-2 text-[10px] font-semibold text-[#626073]"><History size={13} />Riwayat pengambilan</Link>
+              <Link href="/admin/event" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#eae8f0] px-3 py-2 text-[10px] font-semibold text-[#626073]"><CalendarDays size={13} />Jadwal bantuan</Link>
+            </> : <>
+              <Link href="/admin/cabang" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#eae8f0] px-3 py-2 text-[10px] font-semibold text-[#626073]"><Building2 size={13} />Admin cabang</Link>
+              <Link href="/admin/progres" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#eae8f0] px-3 py-2 text-[10px] font-semibold text-[#626073]"><BarChart3 size={13} />Progres penyaluran</Link>
+              <Link href="/admin/pengaduan" className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-[#eae8f0] px-3 py-2 text-[10px] font-semibold text-[#626073]"><MessageSquareWarning size={13} />Pengaduan</Link>
+            </>}
+          </nav>
         </header>
         <div className="mx-auto max-w-[1200px] px-5 py-7 sm:px-8">
           <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-[#6d4aff]">Ringkasan sistem</p><h1 className="mt-2 text-[26px] font-bold tracking-[-0.05em]">Selamat datang, {user.name.split(" ")[0]}.</h1><p className="mt-1 text-[11px] text-[#77778a]">Berikut ringkasan data yang dapat Anda akses.</p></div><Link href="/" className="inline-flex h-9 w-fit items-center gap-2 rounded-lg border border-[#eae8f0] bg-white px-3 text-[10px] font-semibold text-[#555366]">Lihat portal publik <ArrowUpRight size={13} /></Link></div>

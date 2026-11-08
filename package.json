@@ -1,5 +1,5 @@
 {
-  "name": "bansosguard",
+  "name": "sibantu",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,8 +12,8 @@
     "bcryptjs": "^3.0.3",
     "html5-qrcode": "^2.3.8",
     "lucide-react": "^1.70.0",
-    "mysql2": "^3.24.6",
     "next": "16.4.5",
+    "pg": "^8.23.1",
     "qrcode": "^1.5.4",
     "react": "19.3.0",
     "react-dom": "19.3.0",

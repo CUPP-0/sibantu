@@ -20,9 +20,9 @@ export async function PATCH(request, { params }) {
   try {
     const [result] = await connection.execute(
       `UPDATE beneficiary_programs bp
-       JOIN beneficiaries b ON b.id = bp.beneficiary_id
-       SET bp.assistance_amount = ?
-       WHERE bp.id = ? AND b.is_active = 1
+       SET assistance_amount = ?
+       FROM beneficiaries b
+       WHERE b.id = bp.beneficiary_id AND bp.id = ? AND b.is_active = 1
          AND b.region_id IN (${regionIds.map(() => "?").join(", ")})`,
       [parsed.data.amount, programEnrollmentId, ...regionIds],
     );
