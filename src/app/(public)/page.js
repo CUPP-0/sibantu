@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
-  ArrowRight, ArrowUpRight, BadgeCheck, Eye, HandHeart, LockKeyhole,
-  MapPin, MoveUpRight, ShieldCheck, UsersRound,
+  ArrowRight, ArrowUpRight, BadgeCheck, Eye, LockKeyhole,
+  MoveUpRight, ShieldCheck, UsersRound,
 } from "lucide-react";
 
 const programs = [
