@@ -41,22 +41,22 @@ export default function ProgramsPage() {
           {categories.map((item) => <option key={item}>{item}</option>)}
         </select>
       </div>
-      {loading && <div className="mt-8 rounded-2xl border border-[#eae8f0] bg-white p-8 text-center text-sm text-[#77778a]">Memuat data program…</div>}
+      {loading && <div className="mt-8 rounded-2xl border border-[#eae8f0] bg-white p-8 text-center text-sm text-[#77778a]">Memuat data programâ€¦</div>}
       {error && <div role="alert" className="mt-8 rounded-2xl border border-[#f1d8d8] bg-[#fff9f9] p-5 text-sm text-[#a93434]">{error} Pastikan Supabase sudah terhubung dan skema SiBantu sudah diimpor.</div>}
       {!loading && !error && !filtered.length && <div className="mt-8 rounded-2xl border border-dashed border-[#ddd9e8] bg-white p-10 text-center text-sm text-[#77778a]">Belum ada program yang sesuai dengan pencarian Anda.</div>}
       <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((program) => (
           <article key={program.id} className="rounded-[18px] border border-[#eae8f0] bg-white p-5">
-            <div className="flex items-start justify-between gap-3"><span className="rounded-full bg-[#f3f0ff] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.08em] text-[#6448d8]">{program.category}</span><span className="rounded-full bg-[#eff8f3] px-2.5 py-1 text-[9px] font-semibold text-[#218755]">{program.status === "aktif" ? "Aktif" : "Selesai"}</span></div>
+            <div className="flex items-start justify-between gap-3"><span className="rounded-full bg-[#f3f6d8] px-3 py-1 text-[9px] font-bold uppercase tracking-[0.08em] text-[#788900]">{program.category}</span><span className="rounded-full bg-[#eff8f3] px-2.5 py-1 text-[9px] font-semibold text-[#218755]">{program.status === "aktif" ? "Aktif" : "Selesai"}</span></div>
             <h2 className="mt-5 text-[18px] font-bold tracking-[-0.04em]">{program.name}</h2>
             <p className="mt-2 min-h-[72px] text-[12px] leading-6 text-[#77778a]">{program.description}</p>
             <div className="mt-4 grid grid-cols-2 gap-3 border-y border-[#f0eef4] py-3 text-[11px]">
               <div><p className="text-[#9290a0]">Penerima terverifikasi</p><p className="mt-1 font-bold text-[#3d3b4e]">{new Intl.NumberFormat("id-ID").format(program.recipients)}</p></div>
               <div><p className="text-[#9290a0]">Jenis bantuan</p><p className="mt-1 font-bold capitalize text-[#3d3b4e]">{program.assistanceType.replace("_", " ")}</p></div>
-              <div><p className="text-[#9290a0]">Periode</p><p className="mt-1 font-semibold text-[#3d3b4e]">{new Date(program.startDate).toLocaleDateString("id-ID")} – {new Date(program.endDate).toLocaleDateString("id-ID")}</p></div>
+              <div><p className="text-[#9290a0]">Periode</p><p className="mt-1 font-semibold text-[#3d3b4e]">{new Date(program.startDate).toLocaleDateString("id-ID")} â€“ {new Date(program.endDate).toLocaleDateString("id-ID")}</p></div>
               <div><p className="text-[#9290a0]">Kuota program</p><p className="mt-1 font-bold text-[#3d3b4e]">{new Intl.NumberFormat("id-ID").format(program.quota)}</p></div>
             </div>
-            <Link href="/cek-bantuan" className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold text-[#6d4aff]">Informasi pengecekan <ArrowRight size={14} /></Link>
+            <Link href="/cek-bantuan" className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold text-[#111111]">Informasi pengecekan <ArrowRight size={14} /></Link>
           </article>
         ))}
       </div>

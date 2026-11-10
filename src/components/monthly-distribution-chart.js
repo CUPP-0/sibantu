@@ -43,7 +43,7 @@ export default function MonthlyDistributionChart({ data, title = "Penyaluran bul
                 formatter={(value, _name, item) => [currency(value), `${item.payload.transactions} penyaluran`]}
                 contentStyle={{ borderRadius: 12, borderColor: "#eae8f0", fontSize: 10 }}
               />
-              <Bar dataKey="amount" name="Nilai penyaluran" fill="#6d4aff" radius={[5, 5, 0, 0]} maxBarSize={34} />
+              <Bar dataKey="amount" name="Nilai penyaluran" fill="#111111" radius={[5, 5, 0, 0]} maxBarSize={34} />
             </BarChart>
           </ResponsiveContainer>
         </div>

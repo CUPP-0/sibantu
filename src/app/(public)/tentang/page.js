@@ -18,12 +18,12 @@ export default function AboutPage() {
         <p className="mt-4 max-w-[720px] text-[12px] leading-6 text-[#d3d0e0]">Sistem dirancang untuk membantu pengelola mencatat program dan penyaluran, sekaligus memberi masyarakat akses ke informasi agregat dan kanal pengaduan yang menjaga privasi.</p>
       </section>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {principles.map(({ icon: Icon, title, body }) => <article key={title} className="rounded-[17px] border border-[#eae8f0] bg-white p-5"><span className="flex size-10 items-center justify-center rounded-xl bg-[#f3f0ff] text-[#6d4aff]"><Icon size={19} /></span><h2 className="mt-4 text-[14px] font-bold">{title}</h2><p className="mt-2 text-[11px] leading-5 text-[#77778a]">{body}</p></article>)}
+        {principles.map(({ icon: Icon, title, body }) => <article key={title} className="rounded-[17px] border border-[#eae8f0] bg-white p-5"><span className="flex size-10 items-center justify-center rounded-xl bg-[#f3f6d8] text-[#111111]"><Icon size={19} /></span><h2 className="mt-4 text-[14px] font-bold">{title}</h2><p className="mt-2 text-[11px] leading-5 text-[#77778a]">{body}</p></article>)}
       </div>
       <section className="mt-8 rounded-[18px] border border-[#eae8f0] bg-white p-6">
         <h2 className="text-[16px] font-bold">Bagaimana sistem bekerja</h2>
         <ol className="mt-4 grid gap-4 sm:grid-cols-2">
-          {["Data program dan wilayah dikelola oleh petugas berwenang.", "Penerima diverifikasi sebelum dicatat dalam program.", "Penyaluran bantuan dicatat beserta waktu dan petugas.", "Masyarakat melihat ringkasan publik atau mengirim laporan."].map((item, index) => <li key={item} className="flex gap-3 text-[11px] leading-5 text-[#77778a]"><span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#f3f0ff] text-[10px] font-bold text-[#6d4aff]">{index + 1}</span>{item}</li>)}
+          {["Data program dan wilayah dikelola oleh petugas berwenang.", "Penerima diverifikasi sebelum dicatat dalam program.", "Penyaluran bantuan dicatat beserta waktu dan petugas.", "Masyarakat melihat ringkasan publik atau mengirim laporan."].map((item, index) => <li key={item} className="flex gap-3 text-[11px] leading-5 text-[#77778a]"><span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-[#f3f6d8] text-[10px] font-bold text-[#111111]">{index + 1}</span>{item}</li>)}
         </ol>
       </section>
       <p className="mt-5 text-[10px] leading-5 text-[#9290a0]">SiBantu merupakan aplikasi demonstrasi dan bukan kanal resmi pemerintah. Data seed yang disertakan adalah data simulasi, bukan data penerima bantuan yang sebenarnya.</p>

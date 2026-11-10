@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf9fc;
-  --foreground: #202033;
-  --muted: #77778a;
-  --border: #eae8f0;
-  --purple: #6d4aff;
-  --purple-dark: #5035c9;
-  --purple-light: #f3f0ff;
+  --background: #f7f7f5;
+  --foreground: #111111;
+  --muted: #71716c;
+  --border: #e9e9e5;
+  --purple: #111111;
+  --purple-dark: #000000;
+  --purple-light: #f3f6d8;
 }
 
 @theme inline {
@@ -40,19 +40,19 @@ textarea {
 }
 
 ::selection {
-  background: #e8e2ff;
-  color: #3821a4;
+  background: #e9f3a8;
+  color: #333800;
 }
 
 .page-grid {
-  background-image: linear-gradient(to right, #f1eff6 1px, transparent 1px),
-    linear-gradient(to bottom, #f1eff6 1px, transparent 1px);
+  background-image: linear-gradient(to right, #eff0e7 1px, transparent 1px),
+    linear-gradient(to bottom, #eff0e7 1px, transparent 1px);
   background-size: 34px 34px;
   mask-image: linear-gradient(to bottom, black, transparent 90%);
 }
 
 .soft-shadow {
-  box-shadow: 0 16px 48px rgba(37, 26, 77, 0.08);
+  box-shadow: 0 16px 48px rgba(20, 20, 12, 0.08);
 }
 
 .form-control {
@@ -68,8 +68,15 @@ textarea {
 
 .form-control:focus {
   border-color: var(--purple);
-  box-shadow: 0 0 0 3px rgba(109, 74, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(193, 222, 30, 0.2);
 }
+
+/* Shared visual language across public, citizen, and admin screens. */
+body { background: #f1f1ef; }
+header, footer { color: #111; }
+main { background: #fff; }
+button, a { -webkit-tap-highlight-color: transparent; }
+article, [role="dialog"] { border-radius: 20px; }
 
 @media (prefers-reduced-motion: reduce) {
   *,

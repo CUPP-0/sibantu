@@ -11,7 +11,7 @@ const cards = [
 ];
 
 function formatValue(value, key) {
-  if (typeof value !== "number") return "—";
+  if (typeof value !== "number") return "â€”";
   if (key === "distributed") return new Intl.NumberFormat("id-ID").format(value);
   return new Intl.NumberFormat("id-ID").format(value);
 }
@@ -37,13 +37,13 @@ export default function PublicMetrics() {
           <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-[#898799]">Dampak yang terukur</p>
           <p className="mt-1 text-[13px] text-[#77778a]">Angka agregat dari data penyaluran.</p>
         </div>
-        <ArrowUpRight size={18} className="text-[#6d4aff]" />
+        <ArrowUpRight size={18} className="text-[#111111]" />
       </div>
       <div className="grid grid-cols-2 gap-3">
         {cards.map(({ key, label, Icon }) => (
           <div key={key} className="rounded-[14px] border border-[#efedf4] bg-white p-3.5">
-            <span className="flex size-8 items-center justify-center rounded-[10px] bg-[#f3f0ff] text-[#6d4aff]"><Icon size={16} /></span>
-            <p className="mt-3 text-[19px] font-bold tracking-[-0.04em] text-[#242336]">{stats ? formatValue(stats[key], key) : "—"}</p>
+            <span className="flex size-8 items-center justify-center rounded-[10px] bg-[#f3f6d8] text-[#111111]"><Icon size={16} /></span>
+            <p className="mt-3 text-[19px] font-bold tracking-[-0.04em] text-[#242336]">{stats ? formatValue(stats[key], key) : "â€”"}</p>
             <p className="mt-0.5 text-[10px] leading-4 text-[#828092]">{label}</p>
           </div>
         ))}

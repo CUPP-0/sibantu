@@ -25,7 +25,10 @@ export function getDatabaseUnavailableMessage(error) {
   if (["SELF_SIGNED_CERT_IN_CHAIN", "UNABLE_TO_VERIFY_LEAF_SIGNATURE", "CERT_HAS_EXPIRED", "DEPTH_ZERO_SELF_SIGNED_CERT"].includes(error?.code)) {
     return "Sertifikat TLS Supabase tidak dapat diverifikasi. Periksa DATABASE_SSL_CA atau DATABASE_SSL_CA_BASE64 di environment Vercel.";
   }
-  if (["ECONNREFUSED", "ETIMEDOUT", "ENOTFOUND", "ECONNRESET", "ENETUNREACH", "08000", "08006"].includes(error?.code)) {
+  if (error?.code === "ENOTFOUND") {
+    return "Host DATABASE_URL tidak ditemukan di DNS. Salin ulang URI dari Supabase → Connect; jika memakai host Direct connection di Vercel, coba URI Session Pooler atau Transaction Pooler.";
+  }
+  if (["ECONNREFUSED", "ETIMEDOUT", "ECONNRESET", "ENETUNREACH", "08000", "08006"].includes(error?.code)) {
     return "Supabase PostgreSQL tidak dapat dijangkau. Periksa DATABASE_URL dan koneksi internet, lalu coba lagi.";
   }
   if (error?.code === "28P01") {

@@ -6,7 +6,7 @@ import {
   Tooltip, XAxis, YAxis,
 } from "recharts";
 
-const colors = ["#6d4aff", "#a99af7", "#c5bbfa", "#ddd7fc", "#8b77e9"];
+const colors = ["#111111", "#a99af7", "#c5bbfa", "#ddd7fc", "#8b77e9"];
 
 function Rupiah({ value }) {
   return `Rp ${new Intl.NumberFormat("id-ID").format(value || 0)}`;
@@ -33,7 +33,7 @@ export default function TransparencyCharts() {
   }, []);
 
   if (error) return <div role="alert" className="rounded-2xl border border-[#f1d8d8] bg-white p-5 text-sm text-[#a93434]">{error} Periksa koneksi Supabase untuk memuat transparansi dari data aktual.</div>;
-  if (!data) return <div className="rounded-2xl border border-[#eae8f0] bg-white p-8 text-center text-sm text-[#77778a]">Memuat data distribusi…</div>;
+  if (!data) return <div className="rounded-2xl border border-[#eae8f0] bg-white p-8 text-center text-sm text-[#77778a]">Memuat data distribusiâ€¦</div>;
 
   const monthData = data.monthly.map((row) => ({
     ...row,
@@ -61,7 +61,7 @@ export default function TransparencyCharts() {
                 <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#9290a0", fontSize: 10 }} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fill: "#9290a0", fontSize: 10 }} tickFormatter={(value) => `${Math.round(value / 1_000_000)} jt`} />
                 <Tooltip formatter={(value) => Rupiah({ value })} contentStyle={{ borderRadius: 12, borderColor: "#eae8f0", fontSize: 11 }} />
-                <Bar dataKey="amount" fill="#6d4aff" radius={[5, 5, 0, 0]} maxBarSize={34} />
+                <Bar dataKey="amount" fill="#111111" radius={[5, 5, 0, 0]} maxBarSize={34} />
               </BarChart>
             </ResponsiveContainer>
           </div> : <p className="py-16 text-center text-sm text-[#9290a0]">Belum ada penyaluran berhasil dalam periode ini.</p>}
@@ -76,7 +76,7 @@ export default function TransparencyCharts() {
       </div>
       <section className="mt-4 overflow-hidden rounded-[18px] border border-[#eae8f0] bg-white">
         <div className="border-b border-[#f0eef4] px-5 py-4"><h2 className="text-[14px] font-bold">Ringkasan distribusi per wilayah</h2><p className="mt-1 text-[11px] text-[#9290a0]">Informasi agregat tanpa alamat atau identitas penerima.</p></div>
-        {data.byRegion.length ? <div className="overflow-x-auto"><table className="w-full min-w-[560px] text-left text-[11px]"><thead className="bg-[#faf9fc] text-[#9290a0]"><tr><th className="px-5 py-3 font-semibold">Wilayah</th><th className="px-5 py-3 font-semibold">Penyaluran berhasil</th><th className="px-5 py-3 font-semibold">Nilai bantuan</th></tr></thead><tbody>{data.byRegion.map((region) => <tr key={region.name} className="border-t border-[#f3f1f6]"><td className="px-5 py-3.5 font-semibold text-[#464457]">{region.name}</td><td className="px-5 py-3.5 text-[#77778a]">{new Intl.NumberFormat("id-ID").format(region.transactions)} transaksi</td><td className="px-5 py-3.5 font-semibold text-[#464457]">{Rupiah({ value: region.amount })}</td></tr>)}</tbody></table></div> : <p className="p-8 text-center text-sm text-[#9290a0]">Belum ada data per wilayah.</p>}
+        {data.byRegion.length ? <div className="overflow-x-auto"><table className="w-full min-w-[560px] text-left text-[11px]"><thead className="bg-[#f8f8f5] text-[#9290a0]"><tr><th className="px-5 py-3 font-semibold">Wilayah</th><th className="px-5 py-3 font-semibold">Penyaluran berhasil</th><th className="px-5 py-3 font-semibold">Nilai bantuan</th></tr></thead><tbody>{data.byRegion.map((region) => <tr key={region.name} className="border-t border-[#f3f1f6]"><td className="px-5 py-3.5 font-semibold text-[#464457]">{region.name}</td><td className="px-5 py-3.5 text-[#77778a]">{new Intl.NumberFormat("id-ID").format(region.transactions)} transaksi</td><td className="px-5 py-3.5 font-semibold text-[#464457]">{Rupiah({ value: region.amount })}</td></tr>)}</tbody></table></div> : <p className="p-8 text-center text-sm text-[#9290a0]">Belum ada data per wilayah.</p>}
       </section>
     </>
   );
