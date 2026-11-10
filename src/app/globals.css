@@ -53,6 +53,62 @@ button, a { -webkit-tap-highlight-color: transparent; }
   box-shadow: 0 0 0 3px rgba(109, 74, 255, 0.12);
 }
 
+
+/* SiBantu home motion system — subtle, purposeful and accessible. */
+@keyframes home-rise {
+  from { opacity: 0; transform: translate3d(0, 22px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes dashboard-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+  50% { transform: translate3d(0, -11px, 0) rotate(0deg); }
+}
+@keyframes notification-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -8px, 0); }
+}
+@keyframes progress-sweep {
+  from { width: 0; }
+  to { width: 78%; }
+}
+@keyframes step-appear {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes service-glint {
+  0% { transform: translateX(-120%); }
+  45%, 100% { transform: translateX(180%); }
+}
+.home-enter { opacity: 0; animation: home-rise .75s cubic-bezier(.2,.7,.2,1) forwards; }
+.home-delay-1 { animation-delay: .12s; }
+.home-delay-2 { animation-delay: .24s; }
+.home-delay-3 { animation-delay: .36s; }
+.dashboard-float { animation: dashboard-drift 6s ease-in-out infinite; }
+.notification-float { animation: notification-drift 5s ease-in-out infinite; }
+.progress-line { animation: progress-sweep 1.4s cubic-bezier(.2,.7,.2,1) .5s both; }
+.step-item { opacity: 0; animation: step-appear .6s ease-out forwards; }
+.service-card { position: relative; overflow: hidden; }
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 35%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(109,74,255,.045), transparent);
+  transform: translateX(-120%);
+}
+.service-card:hover::after { animation: service-glint .8s ease-out; }
+.home-visual { isolation: isolate; }
+@media (prefers-reduced-motion: reduce) {
+  .home-enter, .dashboard-float, .notification-float, .progress-line, .step-item {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    width: auto;
+  }
+  .service-card::after { animation: none !important; }
+}
+
 /* Shared visual treatment for public, citizen and admin screens. */
 main { background: #fff; }
 article[class*="border"] {
